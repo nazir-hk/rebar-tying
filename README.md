@@ -5,13 +5,15 @@
 </p>
 
 ## Setup
-1. Install dependencies 
+- Python 3.11
+  
 ```
 python -m pip install -r requirements.txt
 ```
-2. Download segmentation model [here](https://gohkust-my.sharepoint.com/:u:/g/personal/anazir_ust_hk/ETEUWNQXKDRHoGJxkl9M5wQBu0SAILeVDTqcx3JQ8BLDlA?e=f7BeSW)
 
-3. Specify model path in `test.py`
+- [Open3D](https://www.open3d.org/docs/latest/getting_started.html) for Python 3.11
+
+- Download segmentation model [here](https://gohkust-my.sharepoint.com/:u:/g/personal/anazir_ust_hk/ETEUWNQXKDRHoGJxkl9M5wQBu0SAILeVDTqcx3JQ8BLDlA?e=f7BeSW). Specify model path in `test.py`
 
 
 ## Demo
