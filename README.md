@@ -17,8 +17,12 @@ python -m pip install -r requirements.txt
 
 
 ## Demo
-
+To display all segemented instances:
 ```
 python test.py
 ```
 
+To select a particular instance by double-clicking on it:
+```
+python user_test.py
+```
