@@ -24,5 +24,5 @@ python test.py
 
 To select a particular instance by double-clicking on it:
 ```
-python user_test.py
+python test_user.py
 ```
