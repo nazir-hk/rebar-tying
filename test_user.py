@@ -27,7 +27,6 @@ def mouse_callback(event,x,y,flags,param):
         click_x = x
         click_y = y
 
-
 def get_mask_center(mask):
     "return pixel coordinates of mask center"
     mask_center = np.mean(np.argwhere(mask),axis=0)
@@ -45,10 +44,10 @@ def mask_vertices_colors(mask, color_image, aligned_depth_frame):
 
     return np.asarray(points).astype(np.float32), np.asarray(colors).astype(np.uint8)
 
-def get_surface_normal(mask):
+def get_surface_normal(mask_verts):
 
     pcd = o3d.geometry.PointCloud()
-    pcd.points = o3d.utility.Vector3dVector(mask)
+    pcd.points = o3d.utility.Vector3dVector(mask_verts[~np.any(mask_verts == 0, axis=1)]) #create pointcloud after discarding points at origin
     pcd.estimate_normals(search_param=o3d.geometry.KDTreeSearchParamHybrid(radius=0.1, max_nn=30))
 
     for i in range(np.asarray(pcd.normals).shape[0]):
@@ -58,6 +57,9 @@ def get_surface_normal(mask):
             pcd.normals[i][2] = -pcd.normals[i][2]
     
     normals = np.asarray(pcd.normals)
+
+    o3d.visualization.draw_geometries([pcd], point_show_normal=True)    # Visualize point cloud 
+
     return np.sum(normals, axis=0) / normals.shape[0]
 
 
@@ -160,8 +162,8 @@ if __name__ == '__main__':
     print(mask_3Dcoord)
 
     #compute surface normal at mask
-    vert_mask, color_mask = mask_vertices_colors(user_mask.cpu().numpy(), color_image, aligned_depth_frame)
-    surface_normal = get_surface_normal(vert_mask)
+    mask_vertices, mask_vertices_color = mask_vertices_colors(user_mask.cpu().numpy(), color_image, aligned_depth_frame)
+    surface_normal = get_surface_normal(mask_vertices)
 
 
 
