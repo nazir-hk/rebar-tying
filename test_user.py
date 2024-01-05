@@ -58,8 +58,6 @@ def get_surface_normal(mask_verts):
     
     normals = np.asarray(pcd.normals)
 
-    o3d.visualization.draw_geometries([pcd], point_show_normal=True)    # Visualize point cloud 
-
     return np.sum(normals, axis=0) / normals.shape[0]
 
 
